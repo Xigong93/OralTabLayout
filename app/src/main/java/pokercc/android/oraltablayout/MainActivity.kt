@@ -27,7 +27,7 @@ class OralFragment : Fragment() {
     companion object {
         private const val POSITION = "position"
         fun newInstance(position: Int) = OralFragment().apply {
-            bundleOf(POSITION to position)
+            arguments = bundleOf(POSITION to position)
         }
     }
 
