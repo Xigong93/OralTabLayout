@@ -31,8 +31,9 @@ private fun log(message: String) {
  * 口语机经上面的切换tab,建议直接写死高度是100dp,否则会出现问题
  * Created by pokercc on 19-10-25.
  */
-class OralTabLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
-    FrameLayout(context, attrs) {
+class OralTabLayout @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
     private val tabs = arrayOf("Part 1", "Part 2&3")
     private val selectedTextSize = 40f
     private val normalTextSize = 19f
@@ -210,7 +211,11 @@ class OralTabLayout @JvmOverloads constructor(context: Context, attrs: Attribute
 
 
 
-            log("第${index}选中状态=$selected,textView:${textView.tag},padding:[${textView.paddingLeft},${textView.paddingTop},${textView.paddingRight},${textView.paddingBottom}]")
+            log(
+                "第${index}选中状态=$selected,textView:${textView.tag}," +
+                        "padding:[${textView.paddingLeft},${textView.paddingTop}," +
+                        "${textView.paddingRight},${textView.paddingBottom}]"
+            )
 
 
         }
@@ -331,12 +336,11 @@ private class TabTextView(context: Context) : AppCompatTextView(context) {
 
 }
 
-
-private class TabBgDrawable
 /**
  * @param first 是不是第一个（第一个是不对称的)
  */
-constructor(private val first: Boolean, @Px private val bottomLineHeight: Float) : Drawable() {
+private class TabBgDrawable(private val first: Boolean, @Px private val bottomLineHeight: Float) :
+    Drawable() {
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).also {
         it.color = Color.WHITE
         it.isDither = true
